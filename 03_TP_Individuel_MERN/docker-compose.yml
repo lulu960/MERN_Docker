@@ -12,6 +12,16 @@ services:
       MONGO_INITDB_DATABASE: leboncoin
     volumes:
       - mongodb_data:/data/db
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: teste
+      ME_CONFIG_MONGODB_URL: mongodb://root:teste@mongodb:27017/leboncoin?authSource=admin
+      ME_CONFIG_BASICAUTH: false 
 
   frontend:
     image: node:latest
